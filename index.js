@@ -1,5 +1,43 @@
+window.onload = function () {
+    let canvas = document.getElementById("canvas");
+    canvas.width = 320;
+    canvas.height = 320;
+    let cellSize = canvas.width / 4;
+    let context = canvas.getContext("2d");
+    // let img = document.getElementById('cell');
+    // context.drawImage(img, 0, 0);
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    let game = new Game(context, cellSize);
+    game.mix(300);
+    game.draw();
+
+    canvas.onclick = function (e) {
+        let x = (e.pageX - canvas.offsetLeft) / cellSize | 0;
+        let y = (e.pageY - canvas.offsetTop) / cellSize | 0;
+        event(x, y);
+    };
+    canvas.ontouchend = function (e) {
+        let x = (e.touches[0].pageX - canvas.offsetLeft) / cellSize | 0;
+        let y = (e.touches[0].pageY - canvas.offsetTop) / cellSize | 0;
+        event(x, y);
+    };
+
+    function event(x, y) {
+        game.move(x, y);
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        game.draw();
+        if (game.victory()) {
+            alert("Собрано за " + game.getClicks() + " касание!");
+            game.mix(300);
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            game.draw(context, cellSize);
+        }
+    }
+};
+
 function Game(context, cellSize) {
-    let arr = [
+    const arr = [
         [1, 2, 3, 4],
         [5, 6, 7, 8],
         [9, 10, 11, 12],
@@ -8,7 +46,16 @@ function Game(context, cellSize) {
     let clicks = 0;
 
     function cellView(x, y) {
-        context.fillStyle = "#FFB93B";
+
+        // let img = document.getElementById('cell');
+        // context.drawImage(img, x + 1, y + 1);
+        const gradient = context.createRadialGradient(x + 40, y + 40, 35, x + 40, y + 40, 25);
+        gradient.addColorStop(0, "#FFB93B");
+        gradient.addColorStop(1, "#FFE082");
+        context.fillStyle = gradient; //градиент
+
+        // context.fillStyle = "#FFB93B"; // full-заливка
+
         context.fillRect(x + 1, y + 1, cellSize - 2, cellSize - 2);
     }
 
@@ -106,40 +153,6 @@ function Game(context, cellSize) {
     };
 }
 
-window.onload = function () {
-    let canvas = document.getElementById("canvas");
-    canvas.width = 320;
-    canvas.height = 320;
-    let cellSize = canvas.width / 4;
-    let context = canvas.getContext("2d");
-    context.fillRect(0, 0, canvas.width, canvas.height);
 
-    let game = new Game(context, cellSize);
-    game.mix(300);
-    game.draw();
-
-    canvas.onclick = function (e) {
-        let x = (e.pageX - canvas.offsetLeft) / cellSize | 0;
-        let y = (e.pageY - canvas.offsetTop) / cellSize | 0;
-        event(x, y);
-    };
-    canvas.ontouchend = function (e) {
-        let x = (e.touches[0].pageX - canvas.offsetLeft) / cellSize | 0;
-        let y = (e.touches[0].pageY - canvas.offsetTop) / cellSize | 0;
-        event(x, y);
-    };
-
-    function event(x, y) {
-        game.move(x, y);
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        game.draw();
-        if (game.victory()) {
-            alert("Собрано за " + game.getClicks() + " касание!");
-            game.mix(300);
-            context.fillRect(0, 0, canvas.width, canvas.height);
-            game.draw(context, cellSize);
-        }
-    }
-};
 
 
