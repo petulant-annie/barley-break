@@ -1,15 +1,13 @@
 window.onload = function () {
-    let canvas = document.getElementById("canvas");
+    const canvas = document.getElementById("canvas");
+    const context = canvas.getContext("2d");
     canvas.width = 320;
     canvas.height = 320;
-    let cellSize = canvas.width / 4;
-    let context = canvas.getContext("2d");
-    // let img = document.getElementById('cell');
-    // context.drawImage(img, 0, 0);
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    const cellSize = canvas.width / 4;
 
-    let game = new Game(context, cellSize);
+    const game = new Game(context, cellSize);
     game.mix(300);
+    context.fillRect(0, 0, canvas.width, canvas.height);
     game.draw();
 
     canvas.onclick = function (e) {
@@ -46,24 +44,14 @@ function Game(context, cellSize) {
     let clicks = 0;
 
     function cellView(x, y) {
-
-        // let img = document.getElementById('cell');
-        // context.drawImage(img, x + 1, y + 1);
-        const gradient = context.createRadialGradient(x + 40, y + 40, 35, x + 40, y + 40, 25);
-        gradient.addColorStop(0, "#FFB93B");
-        gradient.addColorStop(1, "#FFE082");
-        context.fillStyle = gradient; //градиент
-
-        // context.fillStyle = "#FFB93B"; // full-заливка
-
-        context.fillRect(x + 1, y + 1, cellSize - 2, cellSize - 2);
+        context.clearRect(x + 1, y + 1, cellSize - 2, cellSize - 2);
     }
 
     function numView() {
         context.font = "bold " + (cellSize / 2) + "px Sans";
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.fillStyle = "#222";
+        context.fillStyle = "#212121";
     }
 
     this.getNullCell = function () {
@@ -75,6 +63,7 @@ function Game(context, cellSize) {
             }
         }
     };
+
 
     this.draw = function () {
         for (let i = 0; i < 4; i++) {
@@ -118,7 +107,6 @@ function Game(context, cellSize) {
     }
 
     this.mix = function (stepCount) {
-        console.log(stepCount);
         let x, y;
         for (let i = 0; i < stepCount; i++) {
             let nullX = this.getNullCell().x;
