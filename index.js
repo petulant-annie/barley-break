@@ -48,10 +48,14 @@ function Game(context, cellSize) {
     }
 
     function numView() {
-        context.font = "bold " + (cellSize / 2) + "px Sans";
+        context.font = "normal " + (cellSize / 2) + "px Verdana, Geneva, sans-serif";
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.fillStyle = "#212121";
+        context.shadowOffsetX = "-2";
+        context.shadowOffsetY = "1";
+        context.shadowColor = "#000000";
+        context.shadowBlur = 1;
+        context.fillStyle = "#fad5aa";
     }
 
     this.getNullCell = function () {
