@@ -52,10 +52,10 @@ function Game(context, cellSize) {
         context.textAlign = "center";
         context.textBaseline = "middle";
         context.shadowOffsetX = "-2";
-        context.shadowOffsetY = "1";
-        context.shadowColor = "#000000";
+        context.shadowOffsetY = "-2";
+        context.shadowColor = "#f8c790";
         context.shadowBlur = 1;
-        context.fillStyle = "#fad5aa";
+        context.fillStyle = "#000000";
     }
 
     this.getNullCell = function () {
