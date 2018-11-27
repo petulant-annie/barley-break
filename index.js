@@ -80,7 +80,7 @@ function BarleyBreak(context, cellSize) {
         }
     };
 
-    this.move = function (x, y) { // перебор движения
+    this.move = function (x, y) { // движение
         let nullX = this.getNullCell().x;
         let nullY = this.getNullCell().y;
         if (((x - 1 == nullX || x + 1 == nullX) && y == nullY) || ((y - 1 == nullY || y + 1 == nullY) && x == nullX)) {
@@ -90,7 +90,7 @@ function BarleyBreak(context, cellSize) {
         }
     };
 
-    this.victory = function () { // в случае победы
+    this.victory = () => { // в случае победы
         const e = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]];
         let res = true;
         for (let i = 0; i < 4; i++) {
@@ -139,7 +139,7 @@ function BarleyBreak(context, cellSize) {
         clicks = 0;
     };
 
-    this.getClicks = function () {
+    this.getClicks = () => {
         return clicks;
     };
 }
