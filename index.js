@@ -5,36 +5,36 @@ window.onload = function () {
     canvas.height = 320;
     const cellSize = canvas.width / 4;
 
-    const game = new Game(context, cellSize);
+    const game = new BarleyBreak(context, cellSize);
     game.mix(300);
-    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillRect(0, 0, canvas.width, canvas.height); //отрисовка пустой клетки
     game.draw();
 
     canvas.onclick = function (e) {
-        let x = (e.pageX - canvas.offsetLeft) / cellSize | 0;
+        let x = (e.pageX - canvas.offsetLeft) / cellSize | 0; // клик события
         let y = (e.pageY - canvas.offsetTop) / cellSize | 0;
         event(x, y);
     };
     canvas.ontouchend = function (e) {
-        let x = (e.touches[0].pageX - canvas.offsetLeft) / cellSize | 0;
+        let x = (e.touches[0].pageX - canvas.offsetLeft) / cellSize | 0; //тач события
         let y = (e.touches[0].pageY - canvas.offsetTop) / cellSize | 0;
         event(x, y);
     };
 
-    function event(x, y) {
+    function event(x, y) { // собираем
         game.move(x, y);
-        context.fillRect(0, 0, canvas.width, canvas.height);
-        game.draw();
-        if (game.victory()) {
-            alert("Собрано за " + game.getClicks() + " касание!");
+        context.fillRect(0, 0, canvas.width, canvas.height); //отрисовка пустой клетки
+        game.draw(); //отрисовка заполненых клеток и текста
+        if (game.victory()) { //проверка на правильность сборки
+            alert("Congratulations! Finished with " + game.getClicks() + " clicks!");
             game.mix(300);
-            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.fillRect(0, 0, canvas.width, canvas.height); //отрисовка пустой клетки
             game.draw(context, cellSize);
         }
     }
 };
 
-function Game(context, cellSize) {
+function BarleyBreak(context, cellSize) {
     const arr = [
         [1, 2, 3, 4],
         [5, 6, 7, 8],
@@ -44,11 +44,11 @@ function Game(context, cellSize) {
     let clicks = 0;
 
     function cellView(x, y) {
-        context.clearRect(x + 1, y + 1, cellSize - 2, cellSize - 2);
+        context.clearRect(x + 1, y + 1, cellSize - 2, cellSize - 2); // очистка ячейки
     }
 
     function numView() {
-        context.font = "normal " + (cellSize / 2) + "px Verdana, Geneva, sans-serif";
+        context.font = "normal " + (cellSize / 2) + "px Verdana, Geneva, sans-serif"; // стилизация чисел
         context.textAlign = "center";
         context.textBaseline = "middle";
         context.shadowOffsetX = "-2";
@@ -58,7 +58,7 @@ function Game(context, cellSize) {
         context.fillStyle = "#000000";
     }
 
-    this.getNullCell = function () {
+    this.getNullCell = function () { // определение пустой ячейки
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
                 if (arr[j][i] === 0) {
@@ -68,8 +68,7 @@ function Game(context, cellSize) {
         }
     };
 
-
-    this.draw = function () {
+    this.draw = function () { // основная отрисовка
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
                 if (arr[i][j] > 0) {
@@ -81,7 +80,7 @@ function Game(context, cellSize) {
         }
     };
 
-    this.move = function (x, y) {
+    this.move = function (x, y) { // перебор движения
         let nullX = this.getNullCell().x;
         let nullY = this.getNullCell().y;
         if (((x - 1 == nullX || x + 1 == nullX) && y == nullY) || ((y - 1 == nullY || y + 1 == nullY) && x == nullX)) {
@@ -91,8 +90,8 @@ function Game(context, cellSize) {
         }
     };
 
-    this.victory = function () {
-        let e = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]];
+    this.victory = function () { // в случае победы
+        const e = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]];
         let res = true;
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
@@ -104,19 +103,19 @@ function Game(context, cellSize) {
         return res;
     };
 
-    function getRandomBool() {
+    function getRandom() {
         if (Math.floor(Math.random() * 2) === 0) {
             return true;
         }
     }
 
-    this.mix = function (stepCount) {
+    this.mix = function (stepCount) { //перемешивание
         let x, y;
         for (let i = 0; i < stepCount; i++) {
-            let nullX = this.getNullCell().x;
-            let nullY = this.getNullCell().y;
-            let hMove = getRandomBool();
-            let upLeft = getRandomBool();
+            const nullX = this.getNullCell().x;
+            const nullY = this.getNullCell().y;
+            const hMove = getRandom();
+            const upLeft = getRandom();
             if (!hMove && !upLeft) {
                 y = nullY;
                 x = nullX - 1;
