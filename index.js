@@ -48,7 +48,7 @@ function BarleyBreak(context, cellSize) {
     }
 
     function numView() {
-        context.font = "normal " + (cellSize / 2) + "px Verdana, Geneva, sans-serif"; // стилизация чисел
+        context.font = "normal " + (cellSize / 3) + "px Verdana, Geneva, sans-serif"; // стилизация чисел
         context.textAlign = "center";
         context.textBaseline = "middle";
         context.shadowOffsetX = "-2";
