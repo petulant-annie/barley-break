@@ -51,10 +51,10 @@ function BarleyBreak(context, cellSize) {
         context.font = "normal " + (cellSize / 3) + "px Verdana, Geneva, sans-serif"; // стилизация чисел
         context.textAlign = "center";
         context.textBaseline = "middle";
-        context.shadowOffsetX = "-2";
-        context.shadowOffsetY = "-2";
-        context.shadowColor = "#f8c790";
-        context.shadowBlur = 1;
+        // context.shadowOffsetX = "-2";
+        // context.shadowOffsetY = "-2";
+        // context.shadowColor = "#f8c790";
+        // context.shadowBlur = 1;
         context.fillStyle = "#000000";
     }
 

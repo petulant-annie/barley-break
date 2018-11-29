@@ -9,18 +9,33 @@
 </head>
 <body>
 <style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .wrapper {
+        height: 100%;
+        max-width: 1280px;
+        background: url("button/bg_1.jpg") no-repeat center;
+        background-size: cover;
+    }
+
     #canvas {
+        margin: 100px 300px;
         border: 5px solid #353535;
         border-radius: 7px;
-        background: url("button/icon_2(merge)2final22.jpg") repeat;
+        background: url("button/icon_3_final.jpg") repeat;
     }
-    #cell{
-        display: none;
-    }
+
+    /*#cell {*/
+        /*display: none;*/
+    /*}*/
 </style>
 
-<!--<img id="cell" src="button/icon_2(merge)2final.jpg"/>-->
-<canvas id="canvas"></canvas>
-<script src="index.js"></script>
+<div class="wrapper">
+    <!--<img id="cell" src="button/background_1.jpg"/>-->
+    <canvas id="canvas"></canvas>
+    <script src="index.js"></script>
+</div>
 </body>
 </html>
