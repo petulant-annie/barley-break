@@ -4,6 +4,7 @@ window.onload = function () {
     canvas.width = 320;
     canvas.height = 320;
     const cellSize = canvas.width / 4;
+    // const count = document.getElementById('count');
 
     const game = new BarleyBreak(context, cellSize);
     game.mix(300);
@@ -52,10 +53,6 @@ function BarleyBreak(context, cellSize) {
         context.font = "normal " + (cellSize / 3) + "px Verdana, Geneva, sans-serif"; // стилизация чисел
         context.textAlign = "center";
         context.textBaseline = "middle";
-        // context.shadowOffsetX = "-2";
-        // context.shadowOffsetY = "-2";
-        // context.shadowColor = "#f8c790";
-        // context.shadowBlur = 1;
         // context.fillStyle = "#000000";
     }
 
@@ -67,6 +64,13 @@ function BarleyBreak(context, cellSize) {
                 }
             }
         }
+    };
+    
+    this.audio = function audio() {
+        const sound = parcelRequire("audio/click.mp3");
+        const audio = new Audio();
+        audio.src = sound;
+        audio.autoplay = true;
     };
 
     this.draw = function () { // основная отрисовка
@@ -88,17 +92,8 @@ function BarleyBreak(context, cellSize) {
             arr[nullY][nullX] = arr[y][x];
             arr[y][x] = 0;
             clicks++;
-            let audio = new Audio();
-            audio.src = "audio/click.mp3";
-            audio.autoplay = true;
         }
     };
-
-    // this.audio = function audio() {
-    //     let audio = new Audio();
-    //     audio.src = "audio/click.mp3";
-    //     audio.autoplay = true;
-    // };
 
     this.victory = () => { // в случае победы
         const e = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]];
