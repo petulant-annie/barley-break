@@ -15,11 +15,13 @@ window.onload = function () {
         let x = (e.pageX - canvas.offsetLeft) / cellSize | 0; // клик события
         let y = (e.pageY - canvas.offsetTop) / cellSize | 0;
         event(x, y);
+        // audio();
     };
     canvas.ontouchend = function (e) {
         let x = (e.touches[0].pageX - canvas.offsetLeft) / cellSize | 0; //тач события
         let y = (e.touches[0].pageY - canvas.offsetTop) / cellSize | 0;
         event(x, y);
+        
     };
 
     function event(x, y) { // собираем
@@ -34,6 +36,8 @@ window.onload = function () {
             game.draw(context, cellSize);
         }
     }
+    
+    
 };
 
 function BarleyBreak(context, cellSize) {
@@ -66,13 +70,6 @@ function BarleyBreak(context, cellSize) {
         }
     };
     
-    this.audio = function audio() {
-        const sound = parcelRequire("audio/click.mp3");
-        const audio = new Audio();
-        audio.src = sound;
-        audio.autoplay = true;
-    };
-
     this.draw = function () { // основная отрисовка
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
@@ -85,6 +82,13 @@ function BarleyBreak(context, cellSize) {
         }
     };
 
+    this.audio = function audio() {
+        const sound = require('../assets/audio/click.mp3');
+        const audio = new Audio();
+        audio.src = sound;
+        this.audio.autoplay = true;
+    };
+
     this.move = function (x, y) { // движение
         let nullX = this.getNullCell().x;
         let nullY = this.getNullCell().y;
@@ -92,6 +96,7 @@ function BarleyBreak(context, cellSize) {
             arr[nullY][nullX] = arr[y][x];
             arr[y][x] = 0;
             clicks++;
+            this.audio();
         }
     };
 

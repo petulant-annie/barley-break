@@ -123,6 +123,7 @@ window.onload = function () {
 
     var y = (e.pageY - canvas.offsetTop) / cellSize | 0;
     event(x, y);
+    audio();
   };
 
   canvas.ontouchend = function (e) {
@@ -149,6 +150,16 @@ window.onload = function () {
       game.draw(context, cellSize);
     }
   }
+
+  var sound = parcelRequire("./audio/click.mp3");
+
+  function audio(sound) {
+    var audio = new Audio();
+    audio.src = sound;
+    audio.autoplay = true;
+  }
+
+  ;
 };
 
 function BarleyBreak(context, cellSize) {
@@ -178,13 +189,6 @@ function BarleyBreak(context, cellSize) {
         }
       }
     }
-  };
-
-  this.audio = function audio() {
-    var sound = parcelRequire("audio/click.mp3");
-    var audio = new Audio();
-    audio.src = sound;
-    audio.autoplay = true;
   };
 
   this.draw = function () {

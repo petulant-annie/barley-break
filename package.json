@@ -1,0 +1,24 @@
+{
+    "name": "barley-break",
+    "version": "0.1.0",
+    "description": "This is an example project wirh using react MVC",
+    "dependencies": {
+        "react": "^16.6.3",
+        "react-dom": "^16.6.3",
+        "react-router-dom": "^4.3.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.1.6",
+        "@babel/present-env": "^7.1.6",
+        "@babel/present-stage-3": "^7.0.0",
+        "cssnano": "^4.1.7",
+        "parcel": "^1.10.3"
+    },
+    "scripts": {
+        "start": "parcel ./src/index.html",
+        "build": "parcel build ./src/index.html --public-url /barley-break",
+        "deploy":"dg-pages -d dist"
+    },
+    "contributors": [],
+    "license": "MIT"
+}
