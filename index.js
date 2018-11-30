@@ -11,17 +11,11 @@ window.onload = function () {
     game.draw();
 
     canvas.onclick = function (e) {
-        let audio = new Audio();
-        audio.src = "audio/click.mp3";
-        audio.autoplay = true;
         let x = (e.pageX - canvas.offsetLeft) / cellSize | 0; // клик события
         let y = (e.pageY - canvas.offsetTop) / cellSize | 0;
-        event(x, y, audio);
+        event(x, y);
     };
     canvas.ontouchend = function (e) {
-        let audio = new Audio();
-        audio.src = "audio/click.mp3";
-        audio.autoplay = true;
         let x = (e.touches[0].pageX - canvas.offsetLeft) / cellSize | 0; //тач события
         let y = (e.touches[0].pageY - canvas.offsetTop) / cellSize | 0;
         event(x, y);
@@ -29,6 +23,7 @@ window.onload = function () {
 
     function event(x, y) { // собираем
         game.move(x, y);
+        // game.audio();
         context.fillRect(0, 0, canvas.width, canvas.height); //отрисовка пустой клетки
         game.draw(); //отрисовка заполненых клеток и текста
         if (game.victory()) { //проверка на правильность сборки
@@ -61,7 +56,7 @@ function BarleyBreak(context, cellSize) {
         // context.shadowOffsetY = "-2";
         // context.shadowColor = "#f8c790";
         // context.shadowBlur = 1;
-        context.fillStyle = "#000000";
+        // context.fillStyle = "#000000";
     }
 
     this.getNullCell = function () { // определение пустой ячейки
@@ -93,8 +88,17 @@ function BarleyBreak(context, cellSize) {
             arr[nullY][nullX] = arr[y][x];
             arr[y][x] = 0;
             clicks++;
+            let audio = new Audio();
+            audio.src = "audio/click.mp3";
+            audio.autoplay = true;
         }
     };
+
+    // this.audio = function audio() {
+    //     let audio = new Audio();
+    //     audio.src = "audio/click.mp3";
+    //     audio.autoplay = true;
+    // };
 
     this.victory = () => { // в случае победы
         const e = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]];
