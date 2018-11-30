@@ -12,12 +12,13 @@
         "@babel/present-env": "^7.1.6",
         "@babel/present-stage-3": "^7.0.0",
         "cssnano": "^4.1.7",
+        "gh-pages": "^2.0.1",
         "parcel": "^1.10.3"
     },
     "scripts": {
         "start": "parcel ./src/index.html",
         "build": "parcel build ./src/index.html --public-url /barley-break",
-        "deploy":"dg-pages -d dist"
+        "deploy": "gh-pages -d dist"
     },
     "contributors": [],
     "license": "MIT"
