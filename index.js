@@ -11,11 +11,17 @@ window.onload = function () {
     game.draw();
 
     canvas.onclick = function (e) {
+        let audio = new Audio();
+        audio.src = "audio/click.mp3";
+        audio.autoplay = true;
         let x = (e.pageX - canvas.offsetLeft) / cellSize | 0; // клик события
         let y = (e.pageY - canvas.offsetTop) / cellSize | 0;
-        event(x, y);
+        event(x, y, audio);
     };
     canvas.ontouchend = function (e) {
+        let audio = new Audio();
+        audio.src = "audio/click.mp3";
+        audio.autoplay = true;
         let x = (e.touches[0].pageX - canvas.offsetLeft) / cellSize | 0; //тач события
         let y = (e.touches[0].pageY - canvas.offsetTop) / cellSize | 0;
         event(x, y);
