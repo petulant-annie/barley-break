@@ -17,7 +17,7 @@
     },
     "scripts": {
         "start": "parcel ./src/index.html",
-        "build": "parcel build ./src/index.html --public-url /barley-break",
+        "build": " workbox generateSW workbox-config.js &&parcel build ./src/index.html --public-url /barley-break && cp dist/index.html dist/404.html",
         "deploy": "gh-pages -d dist"
     },
     "contributors": [],

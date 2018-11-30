@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
-<style>
-    *{
-        margin: 0;
-        padding: 0;
-    }
-    .wrapper {
-        height: 100%;
-        max-width: 1280px;
-        background: url("../assets/button/bg_1.jpg") no-repeat center;
-        background-size: cover;
-    }
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
-    #canvas {
-        margin: 100px 300px;
-        border: 5px solid #353535;
-        border-radius: 7px;
-        background: url("../assets/button/icon_3_final.jpg") repeat;
-    }
+        .wrapper {
+            height: 100%;
+            max-width: 1280px;
+            background: url("../assets/button/bg_1.jpg") no-repeat center;
+            background-size: cover;
+        }
 
-    /*#cell {*/
+        #canvas {
+            margin: 100px 300px;
+            border: 5px solid #353535;
+            border-radius: 7px;
+            background: url("../assets/button/icon_3_final.jpg") repeat;
+        }
+
+        /*#cell {*/
         /*display: none;*/
-    /*}*/
-</style>
+        /*}*/
+    </style>
 
-<div class="wrapper">
-    <!--<img id="cell" src="button/background_1.jpg"/>-->
-    <div id="count"></div>
-    <canvas id="canvas"></canvas>
-    <script src="index.js"></script>
-</div>
+    <div class="wrapper">
+        <!--<img id="cell" src="button/background_1.jpg"/>-->
+        <div id="count"></div>
+        <canvas id="canvas"></canvas>
+        <script src="index.js"></script>
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./sw.js', { scope: '/barley-break/' }).then(function (reg) {
+                    // регистрация сработала
+                    console.log('Registration succeeded. Scope is ' + reg.scope);
+                }).catch(function (error) {
+                    // регистрация прошла неудачно
+                    console.log('Registration failed with ' + error);
+                });
+            };
+        </script>
+    </div>
 </body>
+
 </html>
