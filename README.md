@@ -1,6 +1,6 @@
 # barley-break
 
-This is an example project with using react MVC
+This is an example project using react MVC
 
 - Open https://petulant-annie.github.io/barley-break/
 - Or for get started
